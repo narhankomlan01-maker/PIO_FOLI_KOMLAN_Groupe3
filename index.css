@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* Les couleurs principales du site */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: #252525;
+  font-family: Nunito, Arial, sans-serif;
+  background: white;
+}
+
+header, .banniere, main {
+  width: 100%;
+  margin: auto;
+  background: white;
+}
+
+header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 28px;
+}
+
+.logo { font-size: 21px; font-weight: 900; font-style: italic; color: #f17920; }
+.logo span { color: #005b37; }
+.bouton-logo { cursor: pointer; }
+
+nav { display: flex; gap: 28px; margin-left: 25px; }
+nav a { color: #333; text-decoration: none; font-size: 11px; font-weight: 800; }
+
+.recherche { width: 195px; height: 27px; margin-left: auto; display: flex; border: 1px solid #ededed; }
+.recherche input { width: 165px; border: 0; padding-left: 10px; font-size: 9px; outline: 0; }
+.bouton { border: 0; font-family: inherit; font-weight: 800; cursor: pointer; }
+.bouton-recherche { width: 30px; color: white; background: #005b37; border: 0; font-size: 15px; }
+
+.liens { display: flex; align-items: center; gap: 18px; white-space: nowrap; font-size: 10px; font-weight: 800; }
+.liens b { color: #f56609; }
+.bouton-connexion { border-radius: 2px; background: #005b37; color: white; padding: 7px 11px; font-size: 10px; }
+
+.banniere { height: 187px; position: relative; background-image: linear-gradient(90deg, #fff3df 0%, #fff9ee 42%, transparent 70%), url('images/hero.jpg'); background-size: cover; background-position: center; }
+.texte-banniere { position: absolute; top: 24px; left: 98px; }
+.feuille { position: absolute; top: 0; left: -70px; color: #43862c; font-size: 45px; transform: rotate(-25deg); }
+h1 { margin: 0; color: #005b37; font-size: 34px; line-height: 1.07; font-weight: 900; }
+.banniere p { margin: 10px 0; line-height: 16px; font-size: 12px; font-weight: 600; }
+.bouton-orange { border-radius: 3px; padding: 9px 20px; color: white; background: #f56609; font-size: 10px; font-weight: 900; }
+
+main { min-height: 274px; padding: 10px 98px 15px; }
+.categories { display: flex; justify-content: space-between; gap: 14px; }
+.categorie { width: 112px; height: 67px; padding-top: 3px; border: 1px solid #ededed; border-radius: 4px; text-align: center; box-shadow: 0 1px 2px #00000010; }
+.categorie span { display: block; height: 38px; font-size: 30px; line-height: 35px; }
+.categorie p { margin: 0; font-size: 9px; line-height: 11px; font-weight: 800; }
+.categorie { cursor: pointer; }
+.categorie.active { border-color: #005b37; background: #f0f8ef; }
+
+.contenu { display: flex; gap: 34px; }
+.produits-populaires { width: 807px; }
+h2 { margin: 14px 0 8px; font-size: 15px; }
+.liste-produits { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.carte-produit { height: 145px; overflow: hidden; border: 1px solid #e7e7e7; border-radius: 4px; box-shadow: 0 1px 3px #00000012; }
+.carte-produit { cursor: pointer; }
+.carte-produit.cache { display: none; }
+.carte-produit img { width: 100%; height: 74px; display: block; object-fit: cover; }
+.carte-produit h3, .carte-produit p { margin: 0 7px; }
+.carte-produit h3 { margin-top: 3px; font-size: 10px; }
+.prix { font-size: 10px; color: #555; }
+.etoiles { color: #f5a900; font-size: 10px; }
+.etoiles small { color: #777; font-size: 8px; }
+.bouton-panier { width: calc(100% - 12px); margin: 1px 6px; border-radius: 2px; padding: 5px 0; color: white; background: #005b37; font-size: 9px; }
+
+.avantages { width: 205px; margin-top: 14px; }
+.avantages div { height: 40px; display: flex; align-items: center; padding: 5px 12px; color: #005b37; background: #fbfdf9; }
+.avantages div { cursor: pointer; }
+.avantages span { margin-right: 11px; font-size: 23px; }
+.avantages p { margin: 0; font-size: 10px; line-height: 11px; }
+.avantages small { color: #777; font-size: 8px; font-weight: 600; }
+.liens span[role="button"] { cursor: pointer; }
+.liens .actif { color: #f56609; }
+
+/* Petit message affiché après chaque action */
+.message {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
+  max-width: 280px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  color: white;
+  background: #005b37;
+  box-shadow: 0 4px 12px #00000033;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.message.visible { opacity: 1; transform: translateY(0); }
+
+/* Tablette : les produits passent sur plusieurs lignes */
+@media (max-width: 1100px) {
+  header, .banniere, main { width: 100%; }
+
+  header { padding: 0 24px; gap: 18px; }
+  nav { gap: 16px; margin-left: 5px; }
+  main { padding-right: 24px; padding-left: 24px; }
+
+  .categories { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .categorie { width: 100%; }
+
+  .contenu { flex-direction: column; gap: 0; }
+  .produits-populaires, .avantages { width: 100%; }
+  .liste-produits { grid-template-columns: repeat(3, 1fr); }
+
+  .avantages { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .avantages div { border: 1px solid #eef2eb; }
+}
+
+/* Mobile : les blocs deviennent faciles à lire et à cliquer */
+@media (max-width: 700px) {
+  body { background: white; }
+
+  header {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .logo { font-size: 20px; }
+
+  nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    gap: 18px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .recherche { order: 4; width: 100%; margin: 0; }
+  .recherche input { width: 100%; }
+  .bouton-recherche { width: 95px; font-size: 10px; }
+
+  .liens { margin-left: auto; gap: 10px; font-size: 9px; }
+  .liens span:first-child { display: none; }
+
+  .banniere { height: 285px; background-position: 60% center; }
+  .texte-banniere { top: 55px; left: 42px; }
+  .feuille { display: none; }
+  h1 { font-size: 31px; }
+  .banniere p { font-size: 12px; }
+
+  main { padding: 14px 16px 25px; }
+  .categories { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .categorie { height: 70px; }
+
+  .liste-produits { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .carte-produit { height: 165px; }
+  .carte-produit img { height: 88px; }
+  .carte-produit h3, .carte-produit p { margin-left: 8px; }
+  .bouton-panier { padding: 6px 0; font-size: 9px; }
+
+  .avantages { grid-template-columns: 1fr; margin-top: 18px; }
+  .avantages div { height: 48px; }
+}
+
+/* Petit mobile : pas de débordement de l'en-tête */
+@media (max-width: 400px) {
+  header { padding-right: 12px; padding-left: 12px; }
+  .liens { gap: 6px; }
+  .bouton-connexion { padding: 7px 8px; }
+  .banniere { height: 270px; }
+  .texte-banniere { left: 25px; }
+  h1 { font-size: 28px; }
+  main { padding-right: 12px; padding-left: 12px; }
+  .categories { gap: 8px; }
+  .liste-produits { gap: 8px; }
+}
